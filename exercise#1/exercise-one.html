@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unique Binary Search Trees</title>
 </head>
+
 <body>
     <script>
         let n = +prompt("enter n : ");
 
         // brute force solution 
-        function bfUBSE(n){
-            if (n==1 || n == 0){
+        function bfUBST(n) {
+            if (n == 1 || n == 0) {
                 return 1;
             }
-            let sumForAllRoots = 0 ;
-            for(let i = 1 ; i<=n;i++){
-                sumForAllRoots += bfUBSE(i-1)*bfUBSE(n-i);
+            let sumForAllRoots = 0;
+            for (let i = 1; i <= n; i++) {
+                sumForAllRoots += bfUBST(i - 1) * bfUBST(n - i);
             }
-            return sumForAllRoots ;
+            return sumForAllRoots;
         }
-        console.log(bfUBSE(n));
+        console.log(bfUBST(n));
 
-        
+        // dp solution 
+        function dpUBST(n) {
+            let ns = new Array(n + 1);
+            ns[0] = ns[1] = 1;
+            for (let i = 2; i <= n; i++) {
+                ns [i] = 0;
+                for (let j = 1; j <= i; j++)
+                    ns[i] += ns[j - 1] * ns[i - j];
+                
+            
+            }
+            return ns[n];
+        }
+        console.log(dpUBST(n));
+        // we can see the difference between this two approach in a little bit numbers and see that 
+        // open scope and call stack in sources panel and see  you can see the difference clearly                  
+
     </script>
 </body>
+
 </html>
