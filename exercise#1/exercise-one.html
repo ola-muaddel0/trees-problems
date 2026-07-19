@@ -9,6 +9,19 @@
     <script>
         let n = +prompt("enter n : ");
 
+        // brute force solution 
+        function bfUBSE(n){
+            if (n==1 || n == 0){
+                return 1;
+            }
+            let sumForAllRoots = 0 ;
+            for(let i = 1 ; i<=n;i++){
+                sumForAllRoots += bfUBSE(i-1)*bfUBSE(n-i);
+            }
+            return sumForAllRoots ;
+        }
+        console.log(bfUBSE(n));
+
         
     </script>
 </body>
